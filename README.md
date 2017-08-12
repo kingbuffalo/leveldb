@@ -4,6 +4,9 @@
 
 Authors: Sanjay Ghemawat (sanjay@google.com) and Jeff Dean (jeff@google.com)
 
+# Fork原因
+  仅仅是自己想抄写一遍代码
+
 # Features
   * Keys and values are arbitrary byte arrays.
   * Data is stored sorted by key.
