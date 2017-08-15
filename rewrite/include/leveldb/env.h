@@ -121,6 +121,52 @@ class EnvWrapper : public Env{
 		Status NewSequentialFile(const std::string& f, SequentialFile** r){
 			return target_->NewSequentialFile(f,r);
 		}
+		Status NewRandomAccessFile(const std::string& f, RandomAccessFile** r){
+			return target_->NewRandomAccessFile(f,r);
+		}
+		Status NewWritableFile(const std::string& f, WritableFile** r){
+			return target_->NewWritableFile(f,r);
+		}
+		Status NewAppendableFile(const std::string& f, WritableFile** r){
+			return target_->NewAppendableFile(f,r);
+		}
+		Status FileExists(const std::string& f){return target_->FileExists(f);}
+		Status GetChildren(const std::string& dir, std::vector<std::string>* r){
+			return target_->GetChildren(dir,r);
+		}
+		Status DeleteFile(const std::string& f){return target_->DeleteFile(f);}
+		Status CreateDir(const std::string& d){return target_->CreateDir(d);}
+		Status DeleteDir(const std::string& d){return target_->DeleteDir(d);}
+		Status GetFileSize(const std::string& f, uint64_t* s){
+			return target_->GetFileSize(f,s);
+		}
+		Status RenameFile(const std::string& s, const strd::string& t){
+			return target_->RenameFile(s,t);
+		}
+		Status LockFile(const std::string& f, FileLock** l){
+			return target_->LockFile(f,l);
+		}
+		Status UnlockFile(FileLock* l){return target_->UnlockFile(l);}
+		void Schedule(void (*f)(void*),void* a){
+			return target_->Schedule(f,a);
+		}
+		void StartThread(void(*f)(void*),void* a){
+			return target_->StartThread(f,a);
+		}
+		virtual Status GetTestDirectory(std::string* path){
+			return target_->GetTestDirectory(path);
+		}
+		virtual Status NewLogger(const std::string& fname, Logger** result){
+			return target_->NewLogger(fname,result);
+		}
+		uint64_t NowMicros(){
+			return target_->NowMicros();
+		}
+		void SleepForMicroseconds(int micros){
+			target_->SleepForMicroseconds(micros);
+		}
+	private:
+		Env* target_;
 };
 
 }
